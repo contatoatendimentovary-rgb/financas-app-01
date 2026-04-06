@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minhas Finanças</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body { font-family: Arial; margin:0; background:#f1f5f4; }
+header { background:#2e7d32; color:#fff; text-align:center; padding:15px; font-weight:bold; }
+
+.container { padding:15px; }
+
+.card {
+    background:#fff;
+    border-radius:15px;
+    padding:15px;
+    margin-bottom:15px;
+}
+
+.resumo {
+    display:flex;
+    justify-content:space-between;
+    text-align:center;
+}
+
+.tabs { display:flex; justify-content:space-around; }
+
+.tab { padding:10px; cursor:pointer; }
+.active { border-bottom:3px solid #2e7d32; }
+
+input, button {
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border-radius:10px;
+}
+
+button { background:#2e7d32; color:white; border:none; }
+
+.item {
+    display:flex;
+    justify-content:space-between;
+    border-bottom:1px solid #eee;
+    padding:8px 0;
+}
+
+.receita { color:green; }
+.despesa { color:red; }
+
+.delete { margin-left:10px; cursor:pointer; }
+
+.ia-box {
+    background:#e8f5e9;
+    padding:10px;
+    border-radius:10px;
+    margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>💰 Minhas Finanças</header>
+
+<div class="container">
+
+<div class="card">
+    <b id="mesAtual"></b>
+</div>
+
+<div class="card resumo">
+    <div>Receita<br><b id="receita">0</b></div>
+    <div>Despesa<br><b id="despesa">0</b></div>
+    <div>Saldo<br><b id="saldo">0</b></div>
+</div>
+
+<div class="tabs">
+    <div class="tab active" onclick="trocarTab('resumo', event)">Resumo</div>
+    <div class="tab" onclick="trocarTab('extrato', event)">Extrato</div>
+</div>
+
+<div id="resumoTab" class="card">
+    <canvas id="grafico"></canvas>
+
+    <div id="iaResumo" class="ia-box">
+        🤖 Carregando...
+    </div>
+</div>
+
+<div id="extratoTab" class="card" style="display:none">
+    <div id="lista"></div>
+</div>
+
+<div class="card">
+    <input id="texto" placeholder="Ex: ganhei 100 / mercado 50">
+    <button id="btnAdd">Adicionar</button>
+</div>
+
+</div>
+
+<!-- 👉 IMPORTANTE: script no final -->
+<script src="app.js"></script>
+
+</body>
+</html>
