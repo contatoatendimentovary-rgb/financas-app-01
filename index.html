@@ -3,125 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Finanças Inteligentes</title>
+<title>Minhas Finanças</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    background: #0f172a;
-    color: white;
-}
+body { font-family: Arial; margin:0; background:#f1f5f4; }
 
 header {
-    padding: 20px;
-    text-align: center;
+    background:#2e7d32;
+    color:#fff;
+    text-align:center;
+    padding:15px;
+    font-size:20px;
+    font-weight:bold;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 24px;
-}
-
-header p {
-    font-size: 12px;
-    opacity: 0.7;
-}
-
-.container {
-    padding: 15px;
-}
+.container { padding:15px; }
 
 .card {
-    background: #1e293b;
-    border-radius: 20px;
-    padding: 15px;
-    margin-bottom: 15px;
+    background:#fff;
+    border-radius:15px;
+    padding:15px;
+    margin-bottom:15px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
 }
 
 .resumo {
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
+    display:flex;
+    justify-content:space-between;
+    text-align:center;
 }
 
-.resumo div {
-    flex: 1;
+.resumo div { flex:1; }
+
+.tabs {
+    display:flex;
+    justify-content:space-around;
+    margin-bottom:10px;
 }
 
-input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 12px;
-    border: none;
-    margin-top: 10px;
-    background: #334155;
-    color: white;
+.tab {
+    padding:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.active { border-bottom:3px solid #2e7d32; }
+
+input, button {
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    margin-top:10px;
 }
 
 button {
-    width: 100%;
-    padding: 12px;
-    border-radius: 12px;
-    border: none;
-    background: #22c55e;
-    color: white;
-    font-weight: bold;
-    margin-top: 10px;
+    border:none;
+    background:#2e7d32;
+    color:#fff;
+    font-weight:bold;
 }
 
 .item {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid #334155;
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    border-bottom:1px solid #eee;
 }
 
-.receita { color: #22c55e; }
-.despesa { color: #ef4444; }
+.receita { color:green; }
+.despesa { color:red; }
 
-.delete {
-    cursor: pointer;
-    margin-left: 10px;
-}
+.delete { margin-left:10px; cursor:pointer; color:red; }
 
-.ia {
-    font-size: 14px;
-    margin-top: 10px;
-    opacity: 0.8;
+.ia-box {
+    background:#e8f5e9;
+    padding:10px;
+    border-radius:10px;
+    margin-top:10px;
 }
 </style>
-
 </head>
 
 <body>
 
-<header>
-    <h1>💰 Finanças Inteligentes</h1>
-    <p>Seu controle financeiro com IA</p>
-</header>
+<header>💰 Minhas Finanças</header>
 
 <div class="container">
 
+<div class="card">
+    <b id="mesAtual"></b>
+</div>
+
 <div class="card resumo">
-    <div>Receita<br><b id="receita">0</b></div>
-    <div>Despesa<br><b id="despesa">0</b></div>
-    <div>Saldo<br><b id="saldo">0</b></div>
+    <div>Receita<br><b id="receita">0.00</b></div>
+    <div>Despesa<br><b id="despesa">0.00</b></div>
+    <div>Saldo<br><b id="saldo">0.00</b></div>
 </div>
 
-<div class="card">
-    <input id="texto" placeholder="Ex: ganhei 100 / mercado 50">
-    <button id="btnAdd">Adicionar</button>
+<div class="tabs">
+    <div class="tab active" onclick="trocarTab('resumo', event)">Resumo</div>
+    <div class="tab" onclick="trocarTab('extrato', event)">Extrato</div>
 </div>
 
-<div class="card">
+<div id="resumoTab" class="card">
+    <canvas id="grafico"></canvas>
+    <div id="iaResumo" class="ia-box">🤖 Analisando...</div>
+</div>
+
+<div id="extratoTab" class="card" style="display:none">
     <div id="lista"></div>
 </div>
 
 <div class="card">
-    <div id="iaResumo" class="ia"></div>
+    <input id="texto" placeholder="Ex: ganhei 100 / mercado 50 / uber 20">
+    <button id="btnAdd">Adicionar</button>
 </div>
 
 </div>
